@@ -6,6 +6,8 @@ export const Container = styled.div`
         width: 100vw;
         text-align: center;
         margin-top: 10px;
+        font-size: 45px;
+        color: white;
     }
 `
 

@@ -2,24 +2,7 @@ import {Container, GameSetup, TutorialButton, AboutGameContainer, RestartButton}
 
 import {useState, useEffect} from 'react'
 
-import NumberCard from './components/NumberCard'
 import Map from './components/Map'
-
-function findZeroOnMatrix(matrix){
-  var arr = []
-  for (var row = 0; row < matrix.length; row++){
-    for(var i  = 0 ; i < matrix[row].length; i++){
-      if (matrix[row][i] == 0){
-        arr = [row, i]
-        break;
-      }
-    }
-    if(arr.length > 0){
-      break;
-    }
-  }
-  return arr;
-}
 
 function array2dToArray1d(matrix){ // Validado
   var arr = []
@@ -37,7 +20,6 @@ function App() {
   const [numbers, setNumbers] = useState([['1', '2', '3'], ['4', '5', '6'], ['7', '8', '0']])
   const [restart, setRestart] = useState(false)
   const [move, setMove] = useState('')
-  const [restartMove, setRestartMove] = useState(false)
 
   function setupZeroPosition(){
     for (var row = 0; row < numbers.length; row++){
@@ -106,21 +88,18 @@ function App() {
   
 
   useEffect(() => {
-    console.log(move)
     window.addEventListener('keypress', e => {
       setMove(e.key)
+      setMove('')
     });
     moveNumbers()
-    setRestartMove(true)
   }, [move]);
 
   useEffect(() => {
     shuffleNumbers(numbers)
-  }, [restart])
-
-  useEffect(() => {
+    setQuantityMoves(0)
     setMove('')
-  }, [restartMove])
+  }, [restart])
 
 
   return (
